@@ -49,7 +49,7 @@ function Home() {
 
 function Hero() {
   return (
-    <section className="relative min-h-[100svh] px-5 pt-12 pb-12">
+    <section className="relative px-5 pt-12 pb-6">
       <RoseCorner position="tl" size={170} />
       <RoseCorner position="br" size={200} opacity={0.7} />
 
