@@ -50,13 +50,12 @@ function Home() {
 function Hero() {
   return (
     <section className="relative px-5 pt-12 pb-6">
-
+      <RoseCorner position="tr" size={100} opacity={0.15} />
 
       <div className="relative z-20 mx-auto flex max-w-xl flex-col items-center text-center animate-fade-up">
         <p className="font-script text-lg italic tracking-wide text-rose">
           Together with their families
         </p>
-        <Ornament />
         <h1 className="font-display text-6xl leading-[0.95] text-foreground sm:text-7xl md:text-8xl" style={{ textShadow: "0 2px 16px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06)" }}>
           Iresh
           <span className="mx-2 font-script italic text-gradient-gold">&</span>
@@ -128,7 +127,7 @@ function Details() {
           <DetailCard icon={Calendar} label="Date" value="26 Aug" sub="Wednesday, 2026" />
           <DetailCard icon={Clock} label="Poruwa" value="09:07 AM" sub="Auspicious time" />
           <DetailCard icon={Sparkles} label="Reception" value="9:00 AM" sub="Onwards" />
-          <DetailCard icon={MapPin} label="Venue" value="The Epitome" sub="Crown Ballroom" />
+          <DetailCard icon={MapPin} label="Venue" value="The Epitome" sub="Crown Ballroom · Kurunegala" />
         </div>
       </div>
     </section>
@@ -249,11 +248,11 @@ function Location() {
     <section className="relative px-5 py-12">
       <div className="relative z-20 mx-auto max-w-xl">
         <div className="text-center">
-          <p className="font-script text-base italic text-rose">Find us</p>
+          <p className="font-script text-base italic text-rose">Find the Location</p>
           <h2 className="mt-1 font-display text-4xl">Location</h2>
           <Ornament />
           <p className="text-sm text-muted-foreground">
-            The Epitome Hotel · Crown Ballroom
+            The Epitome Hotel · Crown Ballroom · Kurunegala
           </p>
         </div>
 
@@ -268,7 +267,7 @@ function Location() {
         </div>
 
         <a
-          href={`https://www.google.com/maps/search/?api=1&query=${q}`}
+          href="https://maps.app.goo.gl/nAMrgsQFnwampMW4A"
           target="_blank"
           rel="noreferrer"
           className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full border border-border bg-white/60 px-5 py-3 text-sm font-medium text-foreground backdrop-blur hover:bg-white"
