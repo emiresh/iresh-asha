@@ -162,20 +162,6 @@ function RsvpForm({ guest }: { guest: ReturnType<typeof findGuest> & {} }) {
         </div>
       </div>
 
-      {attending === "yes" && (
-        <div className="mt-5 animate-fade-up">
-          <label className="mb-1.5 block text-xs uppercase tracking-[0.18em] text-muted-foreground">
-            Dietary preference <span className="lowercase italic">(optional)</span>
-          </label>
-          <input
-            type="text"
-            value={diet}
-            onChange={(e) => setDiet(e.target.value)}
-            placeholder="e.g. Vegetarian, Vegan, Halal"
-            className="w-full rounded-2xl border border-input bg-white/70 px-4 py-3 text-sm outline-none ring-ring/40 backdrop-blur transition focus:border-ring focus:ring-2"
-          />
-        </div>
-      )}
 
       <div className="mt-4">
         <label className="mb-1.5 block text-xs uppercase tracking-[0.18em] text-muted-foreground">
