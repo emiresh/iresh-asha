@@ -12,7 +12,7 @@ export function MusicPlayer() {
   useEffect(() => {
     const a = new Audio(MUSIC_SRC);
     a.loop = true;
-    a.volume = 0.35;
+    a.volume = 0.15;
     a.preload = "auto";
     audioRef.current = a;
     setReady(true);
