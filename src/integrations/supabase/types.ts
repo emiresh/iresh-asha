@@ -14,13 +14,80 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      guests: {
+        Row: {
+          code: string
+          created_at: string
+          name: string
+          seats: number
+          title: string | null
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          name: string
+          seats?: number
+          title?: string | null
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          name?: string
+          seats?: number
+          title?: string | null
+        }
+        Relationships: []
+      }
+      rsvps: {
+        Row: {
+          attending: boolean
+          created_at: string
+          guest_code: string
+          id: string
+          message: string | null
+        }
+        Insert: {
+          attending: boolean
+          created_at?: string
+          guest_code: string
+          id?: string
+          message?: string | null
+        }
+        Update: {
+          attending?: boolean
+          created_at?: string
+          guest_code?: string
+          id?: string
+          message?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rsvps_guest_code_fkey"
+            columns: ["guest_code"]
+            isOneToOne: false
+            referencedRelation: "guests"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_guest_by_code: {
+        Args: { _code: string }
+        Returns: {
+          code: string
+          name: string
+          seats: number
+          title: string
+        }[]
+      }
+      submit_rsvp: {
+        Args: { _attending: boolean; _code: string; _message: string }
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never
