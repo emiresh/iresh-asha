@@ -95,7 +95,7 @@ function RsvpForm({ guest }: { guest: ReturnType<typeof findGuest> & {} }) {
     try {
       localStorage.setItem(
         "rsvp:last",
-        JSON.stringify({ name: guest.name, attending, diet, message, at: Date.now() }),
+        JSON.stringify({ name: guest.name, attending, message, at: Date.now() }),
       );
     } catch {}
     setSubmitted(true);
