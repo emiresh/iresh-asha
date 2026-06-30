@@ -1,14 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Calendar, Clock, MapPin, Sparkles, Heart, ChevronRight, Apple, Mail } from "lucide-react";
+import { Calendar, Clock, MapPin, Sparkles, Heart, ChevronRight, Apple } from "lucide-react";
 import { RosePetals } from "@/components/RosePetals";
 import { RoseCorner } from "@/components/RoseCorner";
 import { Countdown } from "@/components/Countdown";
 import { MusicPlayer } from "@/components/MusicPlayer";
-import { WEDDING, downloadICS, googleCalendarUrl, outlookCalendarUrl } from "@/lib/wedding";
+import { WEDDING, downloadICS, googleCalendarUrl } from "@/lib/wedding";
 import couple1 from "@/assets/couple-1.jpg";
-import couple2 from "@/assets/couple-2.jpg";
-import couple3 from "@/assets/couple-3.jpg";
-import { useState } from "react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -41,8 +38,6 @@ function Home() {
 
       <Hero />
       <Details />
-      <Story />
-      <Schedule />
       <Gallery />
       <CalendarSection />
       <RsvpCta />
@@ -54,7 +49,7 @@ function Home() {
 
 function Hero() {
   return (
-    <section className="relative min-h-[100svh] px-5 pt-12 pb-16">
+    <section className="relative min-h-[100svh] px-5 pt-12 pb-12">
       <RoseCorner position="tl" size={170} />
       <RoseCorner position="br" size={200} opacity={0.7} />
 
@@ -73,17 +68,17 @@ function Hero() {
           Request the pleasure of your company as we celebrate our wedding
         </p>
 
-        <p className="mt-8 font-script text-xl italic text-foreground/80">
+        <p className="mt-6 font-script text-xl italic text-foreground/80">
           The 26th of August, 2026
         </p>
 
-        <div className="mt-6 w-full">
+        <div className="mt-5 w-full">
           <Countdown target={WEDDING.date} />
         </div>
 
         <a
           href="#rsvp"
-          className="mt-10 inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-medium text-white shadow-gold transition-transform hover:scale-[1.03] active:scale-95"
+          className="mt-8 inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-medium text-white shadow-gold transition-transform hover:scale-[1.03] active:scale-95"
           style={{ background: "var(--gradient-gold)" }}
         >
           <Heart className="h-4 w-4" /> RSVP Now
@@ -123,7 +118,7 @@ function DetailCard({
 
 function Details() {
   return (
-    <section className="relative px-5 py-20">
+    <section className="relative px-5 py-12">
       <RoseCorner position="tr" size={140} opacity={0.55} />
       <div className="relative z-20 mx-auto max-w-xl text-center">
         <p className="font-script text-base italic text-rose">Save the date</p>
@@ -141,124 +136,19 @@ function Details() {
   );
 }
 
-function Story() {
-  const moments = [
-    { y: "2019", t: "We Met", d: "A chance meeting that felt like fate." },
-    { y: "2022", t: "First Trip", d: "Wandering hills, falling deeper." },
-    { y: "2025", t: "The Proposal", d: "A quiet evening. A forever yes." },
-    { y: "2026", t: "We Marry", d: "Beginning our greatest chapter." },
-  ];
-  return (
-    <section className="relative px-5 py-20">
-      <div className="relative z-20 mx-auto max-w-xl">
-        <div className="text-center">
-          <p className="font-script text-base italic text-rose">Our journey</p>
-          <h2 className="mt-1 font-display text-4xl">Our Story</h2>
-          <Ornament />
-        </div>
-
-        <ol className="mt-8 space-y-4">
-          {moments.map((m) => (
-            <li key={m.y} className="glass-card flex items-start gap-4 rounded-2xl p-4">
-              <div
-                className="shrink-0 rounded-xl px-3 py-2 font-display text-sm text-white"
-                style={{ background: "var(--gradient-gold)" }}
-              >
-                {m.y}
-              </div>
-              <div className="min-w-0">
-                <p className="font-display text-lg leading-tight">{m.t}</p>
-                <p className="text-sm text-muted-foreground">{m.d}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
-  );
-}
-
-function Schedule() {
-  const items = [
-    { time: "09:00 AM", t: "Guest Arrival", d: "Welcome reception & refreshments" },
-    { time: "09:07 AM", t: "Poruwa Ceremony", d: "Traditional Sri Lankan ceremony" },
-    { time: "10:30 AM", t: "Photography", d: "Family portraits & couple session" },
-    { time: "12:00 PM", t: "Lunch Reception", d: "Crown Ballroom" },
-    { time: "02:30 PM", t: "Cake Cutting", d: "Toasts & celebration" },
-  ];
-  return (
-    <section className="relative px-5 py-20">
-      <RoseCorner position="bl" size={160} opacity={0.55} />
-      <div className="relative z-20 mx-auto max-w-xl">
-        <div className="text-center">
-          <p className="font-script text-base italic text-rose">The day at a glance</p>
-          <h2 className="mt-1 font-display text-4xl">Schedule</h2>
-          <Ornament />
-        </div>
-
-        <div className="mt-6 space-y-3">
-          {items.map((i) => (
-            <div
-              key={i.time}
-              className="glass-card flex items-center gap-4 rounded-2xl p-4"
-            >
-              <div className="w-20 shrink-0 font-display text-sm text-gradient-gold">
-                {i.time}
-              </div>
-              <div className="h-10 w-px bg-border" />
-              <div className="min-w-0 flex-1">
-                <p className="font-medium text-foreground">{i.t}</p>
-                <p className="text-xs text-muted-foreground">{i.d}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Gallery() {
-  const photos = [couple1, couple2, couple3];
-  const [idx, setIdx] = useState(0);
   return (
-    <section className="relative px-5 py-20">
+    <section className="relative px-5 py-12">
       <div className="relative z-20 mx-auto max-w-xl">
-        <div className="text-center">
-          <p className="font-script text-base italic text-rose">Captured moments</p>
-          <h2 className="mt-1 font-display text-4xl">Gallery</h2>
-          <Ornament />
-        </div>
-
-        <div className="relative mt-6 overflow-hidden rounded-3xl shadow-soft">
-          <div
-            className="flex transition-transform duration-700 ease-out"
-            style={{ transform: `translateX(-${idx * 100}%)` }}
-          >
-            {photos.map((p, i) => (
-              <img
-                key={i}
-                src={p}
-                alt={`Iresh and Asha photo ${i + 1}`}
-                loading="lazy"
-                width={1280}
-                height={1600}
-                className="aspect-[4/5] w-full shrink-0 object-cover"
-              />
-            ))}
-          </div>
-          <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5">
-            {photos.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setIdx(i)}
-                aria-label={`Photo ${i + 1}`}
-                className={`h-1.5 rounded-full transition-all ${
-                  idx === i ? "w-6 bg-white" : "w-1.5 bg-white/60"
-                }`}
-              />
-            ))}
-          </div>
+        <div className="overflow-hidden rounded-3xl shadow-soft">
+          <img
+            src={couple1}
+            alt="Iresh and Asha"
+            loading="lazy"
+            width={1280}
+            height={1600}
+            className="aspect-[4/5] w-full object-cover"
+          />
         </div>
       </div>
     </section>
@@ -308,7 +198,7 @@ function CalButton({
 
 function CalendarSection() {
   return (
-    <section className="relative px-5 py-20">
+    <section className="relative px-5 py-12">
       <RoseCorner position="tl" size={140} opacity={0.55} />
       <div className="relative z-20 mx-auto max-w-xl">
         <div className="text-center">
@@ -320,8 +210,6 @@ function CalendarSection() {
         <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
           <CalButton icon={Apple} label="Apple Calendar" onClick={() => downloadICS()} />
           <CalButton icon={Calendar} label="Google Calendar" href={googleCalendarUrl()} />
-          <CalButton icon={Mail} label="Outlook Calendar" href={outlookCalendarUrl()} />
-          <CalButton icon={Calendar} label="Samsung Calendar" onClick={() => downloadICS("samsung-wedding.ics")} />
         </div>
       </div>
     </section>
@@ -330,7 +218,7 @@ function CalendarSection() {
 
 function RsvpCta() {
   return (
-    <section id="rsvp" className="relative px-5 py-20">
+    <section id="rsvp" className="relative px-5 py-12">
       <div className="relative z-20 mx-auto max-w-xl">
         <div
           className="glass-card relative overflow-hidden rounded-3xl p-8 text-center"
@@ -348,7 +236,7 @@ function RsvpCta() {
             className="mt-6 inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-medium text-white shadow-gold transition-transform hover:scale-[1.03]"
             style={{ background: "var(--gradient-gold)" }}
           >
-            <Heart className="h-4 w-4" /> View Sample RSVP
+            <Heart className="h-4 w-4" /> Open RSVP
           </Link>
         </div>
       </div>
@@ -359,7 +247,7 @@ function RsvpCta() {
 function Location() {
   const q = encodeURIComponent("The Epitome Hotel Colombo");
   return (
-    <section className="relative px-5 py-20">
+    <section className="relative px-5 py-12">
       <div className="relative z-20 mx-auto max-w-xl">
         <div className="text-center">
           <p className="font-script text-base italic text-rose">Find us</p>
@@ -395,7 +283,7 @@ function Location() {
 
 function Footer() {
   return (
-    <footer className="relative px-5 pb-20 pt-10 text-center">
+    <footer className="relative px-5 pb-16 pt-8 text-center">
       <RoseCorner position="bl" size={150} opacity={0.6} />
       <RoseCorner position="br" size={150} opacity={0.6} />
       <div className="relative z-20 mx-auto max-w-md">
