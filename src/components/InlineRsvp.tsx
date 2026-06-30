@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Heart, Check, X, Sparkles } from "lucide-react";
-import { findGuest, type Guest } from "@/lib/guests";
+import { supabase } from "@/integrations/supabase/client";
+
+type Guest = { code: string; name: string; title: string | null; seats: number };
 
 function Ornament() {
   return (
@@ -18,22 +20,39 @@ export function InlineRsvp() {
   const [attending, setAttending] = useState<"yes" | "no" | null>(null);
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const code = new URLSearchParams(window.location.search).get("code");
-    setGuest(findGuest(code));
-    setChecked(true);
+    if (!code) {
+      setChecked(true);
+      return;
+    }
+    (async () => {
+      const { data, error } = await supabase.rpc("get_guest_by_code", { _code: code });
+      if (!error && data && (data as Guest[]).length > 0) {
+        setGuest((data as Guest[])[0]);
+      }
+      setChecked(true);
+    })();
   }, []);
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!attending || !guest) return;
-    try {
-      localStorage.setItem(
-        "rsvp:last",
-        JSON.stringify({ name: guest.name, attending, message, at: Date.now() }),
-      );
-    } catch {}
+    setSubmitting(true);
+    setError(null);
+    const { error } = await supabase.rpc("submit_rsvp", {
+      _code: guest.code,
+      _attending: attending === "yes",
+      _message: message || "",
+    });
+    setSubmitting(false);
+    if (error) {
+      setError("Could not send your response. Please try again.");
+      return;
+    }
     setSubmitted(true);
   };
 
@@ -135,13 +154,17 @@ export function InlineRsvp() {
         </div>
       )}
 
+      {error && (
+        <p className="mt-3 text-center text-xs text-destructive">{error}</p>
+      )}
+
       <button
         type="submit"
-        disabled={!attending}
+        disabled={!attending || submitting}
         className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium text-white shadow-gold transition-transform hover:scale-[1.01] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-50"
         style={{ background: "var(--gradient-gold)" }}
       >
-        <Heart className="h-4 w-4" /> Send Response
+        <Heart className="h-4 w-4" /> {submitting ? "Sending…" : "Send Response"}
       </button>
     </form>
   );
