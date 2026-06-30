@@ -198,7 +198,7 @@ function CalButton({
 function CalendarSection() {
   return (
     <section className="relative px-5 py-12">
-      <RoseCorner position="tl" size={140} opacity={0.55} />
+      <RoseCorner position="tl" size={140} opacity={0.25} />
       <div className="relative z-20 mx-auto max-w-xl">
         <div className="text-center">
           <p className="font-script text-base italic text-rose">Save the moment</p>
