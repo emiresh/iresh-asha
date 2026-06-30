@@ -12,12 +12,35 @@ export function MusicPlayer() {
   useEffect(() => {
     const a = new Audio(MUSIC_SRC);
     a.loop = true;
-    a.volume = 0.15;
+    a.volume = 0.2;
     a.preload = "auto";
     audioRef.current = a;
     setReady(true);
-    // Attempt soft autoplay (likely blocked until user interacts)
-    a.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+
+    // Try direct autoplay (works on some browsers / when user revisits)
+    a.play()
+      .then(() => setPlaying(true))
+      .catch(() => {
+        // Mobile/Safari blocks autoplay until first user gesture.
+        // Start playback on the very first interaction anywhere.
+        const start = () => {
+          a.play()
+            .then(() => setPlaying(true))
+            .catch(() => {});
+          cleanup();
+        };
+        const cleanup = () => {
+          window.removeEventListener("pointerdown", start);
+          window.removeEventListener("touchstart", start);
+          window.removeEventListener("keydown", start);
+          window.removeEventListener("scroll", start);
+        };
+        window.addEventListener("pointerdown", start, { once: true });
+        window.addEventListener("touchstart", start, { once: true });
+        window.addEventListener("keydown", start, { once: true });
+        window.addEventListener("scroll", start, { once: true, passive: true });
+      });
+
     return () => {
       a.pause();
       audioRef.current = null;
