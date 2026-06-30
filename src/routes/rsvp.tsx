@@ -163,18 +163,20 @@ function RsvpForm({ guest }: { guest: ReturnType<typeof findGuest> & {} }) {
       </div>
 
 
-      <div className="mt-4">
-        <label className="mb-1.5 block text-xs uppercase tracking-[0.18em] text-muted-foreground">
-          Message to the couple <span className="lowercase italic">(optional)</span>
-        </label>
-        <textarea
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          rows={3}
-          placeholder="Wishes, blessings, or a sweet note…"
-          className="w-full resize-none rounded-2xl border border-input bg-white/70 px-4 py-3 text-sm outline-none ring-ring/40 backdrop-blur transition focus:border-ring focus:ring-2"
-        />
-      </div>
+      {attending === "no" && (
+        <div className="mt-4 animate-fade-up">
+          <label className="mb-1.5 block text-xs uppercase tracking-[0.18em] text-muted-foreground">
+            Message to the couple <span className="lowercase italic">(optional)</span>
+          </label>
+          <textarea
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            rows={3}
+            placeholder="Wishes, blessings, or a sweet note…"
+            className="w-full resize-none rounded-2xl border border-input bg-white/70 px-4 py-3 text-sm outline-none ring-ring/40 backdrop-blur transition focus:border-ring focus:ring-2"
+          />
+        </div>
+      )}
 
       <button
         type="submit"

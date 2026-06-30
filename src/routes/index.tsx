@@ -58,7 +58,7 @@ function Hero() {
           Together with their families
         </p>
         <Ornament />
-        <h1 className="font-display text-6xl leading-[0.95] text-foreground sm:text-7xl md:text-8xl">
+        <h1 className="font-display text-6xl leading-[0.95] text-foreground sm:text-7xl md:text-8xl" style={{ textShadow: "0 2px 16px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06)" }}>
           Iresh
           <span className="mx-2 font-script italic text-gradient-gold">&</span>
           Asha
@@ -118,7 +118,7 @@ function DetailCard({
 
 function Details() {
   return (
-    <section className="relative px-5 py-12">
+    <section className="relative px-5 pt-4 pb-12">
       <RoseCorner position="tr" size={140} opacity={0.55} />
       <div className="relative z-20 mx-auto max-w-xl text-center">
         <p className="font-script text-base italic text-rose">Save the date</p>
