@@ -84,7 +84,7 @@ function InvalidCode() {
 
 function RsvpForm({ guest }: { guest: ReturnType<typeof findGuest> & {} }) {
   const [attending, setAttending] = useState<"yes" | "no" | null>(null);
-  const [diet, setDiet] = useState("");
+  
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
