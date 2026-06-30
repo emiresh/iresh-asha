@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Music2, VolumeX } from "lucide-react";
 
-// Soft romantic instrumental — royalty-free piano loop from Pixabay CDN.
 const MUSIC_SRC =
-  "https://cdn.pixabay.com/audio/2022/10/18/audio_31c2d2d2e8.mp3";
+  "https://raw.githubusercontent.com/emiresh/wedrsvp/main/music.mp3";
 
 export function MusicPlayer() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -13,7 +12,7 @@ export function MusicPlayer() {
   useEffect(() => {
     const a = new Audio(MUSIC_SRC);
     a.loop = true;
-    a.volume = 0.35;
+    a.volume = 0.15;
     a.preload = "auto";
     audioRef.current = a;
     setReady(true);

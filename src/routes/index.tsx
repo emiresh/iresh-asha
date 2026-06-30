@@ -50,8 +50,7 @@ function Home() {
 function Hero() {
   return (
     <section className="relative px-5 pt-12 pb-6">
-      <RoseCorner position="tl" size={170} />
-      <RoseCorner position="br" size={200} opacity={0.7} />
+
 
       <div className="relative z-20 mx-auto flex max-w-xl flex-col items-center text-center animate-fade-up">
         <p className="font-script text-lg italic tracking-wide text-rose">
@@ -119,7 +118,7 @@ function DetailCard({
 function Details() {
   return (
     <section className="relative px-5 pt-4 pb-12">
-      <RoseCorner position="tr" size={140} opacity={0.55} />
+      <RoseCorner position="tr" size={140} opacity={0.25} />
       <div className="relative z-20 mx-auto max-w-xl text-center">
         <p className="font-script text-base italic text-rose">Save the date</p>
         <h2 className="mt-1 font-display text-4xl text-foreground">Wedding Details</h2>
@@ -199,7 +198,7 @@ function CalButton({
 function CalendarSection() {
   return (
     <section className="relative px-5 py-12">
-      <RoseCorner position="tl" size={140} opacity={0.55} />
+      <RoseCorner position="tl" size={140} opacity={0.25} />
       <div className="relative z-20 mx-auto max-w-xl">
         <div className="text-center">
           <p className="font-script text-base italic text-rose">Save the moment</p>
