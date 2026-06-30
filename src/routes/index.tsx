@@ -118,7 +118,7 @@ function DetailCard({
 function Details() {
   return (
     <section className="relative px-5 pt-4 pb-12">
-      <RoseCorner position="tr" size={140} opacity={0.55} />
+      <RoseCorner position="tr" size={140} opacity={0.25} />
       <div className="relative z-20 mx-auto max-w-xl text-center">
         <p className="font-script text-base italic text-rose">Save the date</p>
         <h2 className="mt-1 font-display text-4xl text-foreground">Wedding Details</h2>
