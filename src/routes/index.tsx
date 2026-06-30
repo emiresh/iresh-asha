@@ -50,7 +50,7 @@ function Home() {
 function Hero() {
   return (
     <section className="relative px-5 pt-12 pb-6">
-
+      <RoseCorner position="tl" size={140} opacity={0.2} />
 
       <div className="relative z-20 mx-auto flex max-w-xl flex-col items-center text-center animate-fade-up">
         <p className="font-script text-lg italic tracking-wide text-rose">
