@@ -46,7 +46,7 @@ export function InlineRsvp() {
     const { error } = await supabase.rpc("submit_rsvp", {
       _code: guest.code,
       _attending: attending === "yes",
-      _message: message || null,
+      _message: message || "",
     });
     setSubmitting(false);
     if (error) {
