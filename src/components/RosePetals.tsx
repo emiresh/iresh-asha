@@ -1,7 +1,10 @@
 import petal from "@/assets/petal.png";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export function RosePetals({ count = 14 }: { count?: number }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   const petals = useMemo(
     () =>
       Array.from({ length: count }).map((_, i) => ({
@@ -14,6 +17,8 @@ export function RosePetals({ count = 14 }: { count?: number }) {
       })),
     [count],
   );
+
+  if (!mounted) return null;
 
   return (
     <div className="pointer-events-none fixed inset-0 z-10 overflow-hidden" aria-hidden>
