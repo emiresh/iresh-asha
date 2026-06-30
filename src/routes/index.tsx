@@ -1,9 +1,10 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { Calendar, Clock, MapPin, Sparkles, Heart, ChevronRight, Apple } from "lucide-react";
 import { RosePetals } from "@/components/RosePetals";
 import { RoseCorner } from "@/components/RoseCorner";
 import { Countdown } from "@/components/Countdown";
 import { MusicPlayer } from "@/components/MusicPlayer";
+import { InlineRsvp } from "@/components/InlineRsvp";
 import { WEDDING, downloadICS, googleCalendarUrl } from "@/lib/wedding";
 import couple1 from "@/assets/couple-1.jpg";
 
@@ -219,24 +220,13 @@ function RsvpCta() {
   return (
     <section id="rsvp" className="relative px-5 py-12">
       <div className="relative z-20 mx-auto max-w-xl">
-        <div
-          className="glass-card relative overflow-hidden rounded-3xl p-8 text-center"
-        >
-          <RoseCorner position="tr" size={120} opacity={0.5} />
+        <div className="text-center">
           <p className="font-script text-base italic text-rose">Kindly respond</p>
           <h2 className="mt-1 font-display text-4xl">RSVP</h2>
           <Ornament />
-          <p className="mx-auto max-w-xs text-sm text-muted-foreground">
-            Please open the invitation link sent to you to RSVP.
-          </p>
-          <Link
-            to="/rsvp"
-            search={{ code: "DEMO" }}
-            className="mt-6 inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-medium text-white shadow-gold transition-transform hover:scale-[1.03]"
-            style={{ background: "var(--gradient-gold)" }}
-          >
-            <Heart className="h-4 w-4" /> Open RSVP
-          </Link>
+        </div>
+        <div className="mt-6">
+          <InlineRsvp />
         </div>
       </div>
     </section>
